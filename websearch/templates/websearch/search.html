@@ -1,0 +1,221 @@
+{% extends "base.html" %}
+
+
+
+
+{% block title %}
+    W_Search:  {{ kw }}
+{% endblock %}
+{% block body %}
+{% block extra_head %}
+
+
+<style type="text/css">
+ #content {
+            margin-left: 130px; 
+            padding-right: 60px;
+      }
+#search{
+    margin-left: 50px;
+}
+#pagechoose{
+    position: fixed;
+    margin-left: 20px;
+    margin-top: 30px;
+}
+</style>
+{% endblock %}
+<!-- topbar starts -->
+  <div class="navbar navbar-inverse navbar-fixed-top">
+        <div class="navbar-inner">
+            <div class="container">  
+                <a class="brand" href="{% url 'websearch:index'%}">W-Search!</a>
+                <ul class="nav">
+                    {% if u %}
+                    <li>
+                        <img width="40" height="40" src="/static/face/{{ u.userprofile.face }}" />
+                    </li>
+                    <li id="user">
+                        <a href="{% url 'websearch:edit'%}">{{ u }}</a>
+                    </li>
+                    <li id="mylike">
+                        <a href="{% url 'websearch:like'%}">Mylike</a>
+                    </li>
+                    <li id="message">
+                        <a href="{% url 'websearch:showmsg'%}">Message</a>
+                    </li>
+                    <li>
+                        <a href="{% url 'websearch:login'%}">Logout <i class="icon-eject"></i></a>
+                    </li>
+                    {% else %}
+                    <li id="log">
+                        <a href="{% url 'websearch:login'%}">Login<i class="icon-play"></i></a>
+                    </li>
+                    <li id="register">
+                        <a href="#">Register</a>
+                    </li>
+                    {% endif %}
+                </ul>                     
+            </div>                
+        </div>
+    </div>
+<div id = "search">
+<form id="search" action="{% url 'websearch:search' %}" method=get>
+	<table class="form-table">
+	<td>
+		<tr><i class="icon-search"></i><input type="text" id="kw" name="kw" width="1000px"  value="{{ kw }}"></tr>
+     		<tr>&nbsp;&nbsp;</tr>
+		<tr><input type="hidden" id="pg" name="pg" value="1"></tr>
+                        <tr><input type="submit" id="submit" value=" Search" class="btn btn-info" ></tr>
+		</td>
+	</table>
+</form> 
+</div>
+<hr>
+
+
+<div id ="content">
+<div id="Zcontent" class="span13">
+<h1><a href="http://z.cn">Amazon.cn</a></h1>
+<hr>
+<table style="width=80 height=40">
+{% if ZDatas %}
+{% for Zs in ZDatas %}
+<tr>
+     {% for ZData in Zs %}
+     <td style="width=80 height=40">
+        <div id="content" class="span4" >
+            <a href="{{ ZData.href }}" target="_blank"><h4>{{ ZData.title }}</h4> </a>
+            <a href="{{ ZData.href }}" target="_blank"><img src="{{ ZData.img }}"  style="text-align:center" class=""/></a> 
+            <h2>{{ ZData.price }} &nbsp;&nbsp; &nbsp; 
+{% if u %}
+<button  class="btn btn-primary noty" data-noty-options='{"text":"You Change The Gift Succeed!","layout":"topRight","type":"success"}'>like</button>
+{% else %}
+<button  class="btn btn-primary noty" data-noty-options='{"text":"Please login.","layout":"topRight","type":"error"}'>like</button>
+{% endif %}
+</h2>        
+        </div>
+    </td>  
+    {% endfor %}  
+</tr>
+{% endfor %}
+{% endif %}
+</table>
+</div>
+
+<hr>
+<div id="Tcontent" class="span13">
+<hr>
+<h1><a href="http://www.taobao.com">Taobao.cn</a></h1>
+    <hr>
+<table style="width=80 height=40">
+
+{% if TDatas %}
+{% for Ts in TDatas %}
+<tr>
+     {% for TData in Ts %}
+     <td >
+        <div id="content" class="span4" >
+            <a href="{{ TData.href }}" target="_blank"><h4>{{ TData.title }}</h4> </a>
+            <a href="{{ TData.href }}" target="_blank"><img src="{{ TData.img }}"  style="width:50;height:50; text-align:center" class=""/></a> 
+            <h4>{{ TData.price }} &nbsp;&nbsp; &nbsp; 
+{% if u %}
+<button  class="btn btn-primary noty" data-noty-options='{"text":"You Change The Gift Succeed!","layout":"topRight","type":"success"}'>like</button>
+{% else %}
+<button  class="btn btn-primary noty" data-noty-options='{"text":"Please login.", "layout":"topRight","type":"error"}'>like</button>
+{% endif %}</h4>        
+        </div>
+    </td>  
+    {% endfor %}  
+</tr>
+{% endfor %}
+{% endif %}
+</table>
+</div>
+<!--end taobao-->
+<hr>
+</div>
+<div id="pagechoose" class="center">
+    {% if prepg <= 0 %}
+    <a href="#" class="btn btn-success">Prev Page</a>
+    <h1>1</h1>
+    <h1><a href="/search/?kw={{ kw }}&pg=2">2</a></h1>
+    <h1><a href="/search/?kw={{ kw }}&pg=3">3</a> </h1>
+    <h1>..</h1>
+    <a href="?kw={{ kw }}&pg=2" class="btn btn-success">Next Page</a>
+    
+    {% else %}
+    <a href="/search/?kw={{ kw }}&pg={{ prepg }}" class="btn btn-success">Prev Page</a>
+    <h1>..</h1>
+    <h1><a href="/search/?kw={{ kw }}&pg={{prepg}}">{{ prepg }}</a></h1>
+    <h1><p>{{ pg }}</p></h1>
+    <h1><a href="/search/?kw={{ kw }}&pg={{nextpg}}">{{nextpg}}</a> </h1>
+    <h1>..</h1>
+    <a href="?kw={{ kw }}&pg={{ nextpg }}"class="btn btn-success">Next Page</a>
+{% endif%}
+</div>
+<footer>
+      <p class="pull-right">Powered by: <a href="mailto:wu.zhendong0907@gmail.com" title="wu.zhendong0907@gmail.com">W!</a></p>
+      <span class="pull-right">|</span>
+      <p class="pull-right"><a href="{% url 'websearch:contact'%}" target="_blank" color:black>Contact_Us</a> </p>
+</footer>
+
+<!--script part-->
+<script type="text/javascript" src="/static/prototype.js"></script>
+<script type="text/javascript">
+var btns = document.getElementsByTagName('button');
+var list = document.getElementById("like");
+for(i = 0; i < btns.length; i++){
+	btns[i].onclick = like;
+}
+function like(e){
+	var t = e.target;
+	var href = t.parentNode.parentNode.getElementsByTagName('a')[0].href;
+	var title = t.parentNode.parentNode.getElementsByTagName('h4')[0].firstChild.nodeValue;
+	var img = t.parentNode.parentNode.getElementsByTagName('img')[0].src;
+	new Ajax.Request(
+        "{% url 'websearch:likeit' %}",
+        {
+            method:"post",
+            parameters:"img="+ img + "&href=" + href + "&title=" + title,   
+            setRequestHeader:{"If-Modified-Since":"0"},
+            onComplete:function(x){   
+                    //alert(x.responseText);
+		    if(x.responseText == "Like Succeed."){
+		    	t.firstChild.nodeValue = 'unlike'
+		    	t.onclick = unlike;
+	            }
+		   else if(x.responseText == "Please Login."){
+			//alert(t.getAttribute('data-noty-options'));
+	            }
+            },
+            onError:function(x){  
+                    //alert(x.statusText);
+            } 
+        } 
+   	)
+}
+function unlike(e){
+	var t = e.target;
+	var href = t.parentNode.parentNode.getElementsByTagName('a')[0].href;
+	new Ajax.Request(
+        "{% url 'websearch:unlikeit' %}",
+        {
+            method:"post",
+            parameters:"href="+ href,   
+            setRequestHeader:{"If-Modified-Since":"0"},
+            onComplete:function(x){   
+                    //alert(x.responseText);
+		    if(x.responseText == "Unlike Succeed."){
+		    	t.firstChild.nodeValue = 'like'
+		    	t.onclick = like;
+	            }
+            },
+            onError:function(x){  
+                    //alert(x.statusText);
+            } 
+        } 
+   	)
+}
+</script>
+{% endblock %}

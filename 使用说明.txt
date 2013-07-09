@@ -1,0 +1,29 @@
+HELLO:
+
+1. 本项目使用python 2.7 + django 1.5开发完成
+同时使用了python外部库pyquery
+使用前请在电脑上下载python 2.7 和 django 1.5.
+再下载pyquery库：
+	windows:（https://pypi.python.org/pypi/pyquery/） 安装在django指定目录。
+	linux&mac : 可使用命令 sudo easy_install pyquery
+
+2. 配置说明：
+	bsDesign/setting.py
+	15行： 改为 OWNPATH/bsDesign/sqlite3.db
+	75行： 改为 OWNPATH/bsDesign/static
+	115行： 改为 OWNPATH/bsDesign/websearch/templates/websearch
+	（OWNPATH 为程序当前的绝对路径， 建议路径为英文）
+
+3.数据库
+	内置用户信息：(下为用户名和密码,其中admin是管理员帐号)
+	admin admin
+	wengge 123456
+	wudong 123456
+	（其中管理员帐号可登陆 url为http://127.0.0.1:8000/admin/ 进行登陆）
+
+运行说明：
+cd OWNPATH
+python manage.py syncdb
+python manage.py runserver
+
+OWNPATH为项目文件夹放置的目录

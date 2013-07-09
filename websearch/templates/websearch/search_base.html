@@ -1,0 +1,57 @@
+{% extends "base.html" %}
+
+{% block extra_head %}
+    <style>
+        body {
+            padding-top: 60px; /* 60px to make the container go all the way to the bottom of the topbar */
+      }
+    </style> 
+{% endblock %}   
+
+{% block header %}
+    {% block menu %}
+    <div class="navbar navbar-inverse navbar-fixed-top">
+        <div class="navbar-inner">
+            <div class="container">  
+                <a class="brand" href="#">BLOG</a>
+                <ul class="nav">
+                    <li id="home" class="active divider-vertical">
+                        <a href="#">Home</a>
+                    </li>
+			<li id="list">
+                        <a href="#">Article</a>
+                    </li>
+                    <li id="about">
+                        <a href="#">About</a>
+                    </li>
+
+		<li id="upfile">
+                        <a href="#">Upload</a>
+                    </li>
+		{% if u %}
+		<li id="user">
+                        <a href="#">{{ u }}</a>
+                    </li>
+		<li>
+                        <img width="40" height="40" src="/static/face/{{ u.userprofile.face }}" />
+                    </li>
+                    <li id="showmsg">
+                        <a href="#">Message</a>
+                    </li>
+		<li>
+                        <a href="#">Logout</a>
+                    </li>
+		{% else %}
+		<li id="log">
+                        <a href="#">Login</a>
+                    </li>
+		<li id="register">
+                        <a href="#">Register</a>
+                    </li>
+		{% endif %}
+                </ul>                     
+            </div>                
+        </div>
+    </div>    
+    {% endblock %}
+{% endblock %}

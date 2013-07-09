@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8" />
+    <title>
+        {% block title %}{% endblock %}        
+    </title>
+    <link rel="stylesheet" href="/static/css/bootstrap.css">
+    
+
+    <style>
+        body {
+            padding-top: 70px; /* 60px to make the container go all the way to the bottom of the topbar */
+      }
+    </style> 
+    {% block extra_head %}
+    {% endblock %}
+    <link href="/static/css/jquery.cleditor.css" rel='stylesheet'>
+    <link href='/static/css/colorbox.css' rel='stylesheet'>
+    <link href='/static/css/jquery.noty.css' rel='stylesheet'>
+    <link href='/static/css/noty_theme_default.css' rel='stylesheet'>
+    <link href="/static/css/charisma-app.css" rel="stylesheet">
+    <link href="/static/css/uniform.default.css" rel='stylesheet'>
+
+</head>
+
+<body>
+    {% block body %}
+        {% block header %}
+            {% block menu %}
+            {% endblock %}
+        {% endblock %}
+        
+        <div class="container">
+        {% block content %}
+            <div class="container-fluid">
+                <div class="row-fluid">
+                    <div class="span3">
+                            {% block aside %}
+                                {% block tags %}{% endblock %}
+                            {% endblock %}
+                    </div>
+                    <div class="span9">                            
+                        {% block article %}
+                            {% block article_title %}
+                                {% comment %}
+                        		  {% block [section]_menu %} {% block page_menu %}
+                                {% endcomment %}
+                            {% endblock %}
+                            {% block article_content %}{% endblock %}
+                        {% endblock %}
+                        
+                        {% block article_menu %} {% endblock %}
+                        {% block comments %} {% endblock %}
+                    </div>
+                    
+                </div>
+            </div>
+                 <footer>
+                     <p class="pull-left">Powered by: <a href=""></a></p>
+                </footer>
+            {% endblock %}
+            {% block footer %}
+                
+            {% endblock %}
+       
+    </div>
+ {% endblock %}
+    <script src="/static/js/jquery.js"></script>
+    <script src="/static/js/bootstrap.min.js"></script>
+        
+    <script src="/static/js/jquery-1.7.2.min.js"></script>
+    <script src="/static/js/jquery-ui-1.8.21.custom.min.js"></script>
+    <script src="/static/js/bootstrap-transition.js"></script>
+    <script src="/static/js/bootstrap-alert.js"></script>
+    <script src="/static/js/bootstrap-modal.js"></script>
+    <script src="/static/js/bootstrap-dropdown.js"></script>
+    <script src="/static/js/bootstrap-scrollspy.js"></script>
+    <script src="/static/js/bootstrap-tab.js"></script>
+    <script src="/static/js/bootstrap-tooltip.js"></script>
+    <script src="/static/js/bootstrap-popover.js"></script>
+    <script src="/static/js/bootstrap-button.js"></script>
+    <script src="/static/js/bootstrap-collapse.js"></script>
+    <script src="/static/js/bootstrap-carousel.js"></script>
+    <script src="/static/js/bootstrap-typeahead.js"></script>
+    <script src="/static/js/bootstrap-tour.js"></script>
+    <script src="/static/js/jquery.cookie.js"></script>
+    <script src="/static/js/fullcalendar.min.js"></script>
+    <script src="/static/js/jquery.dataTables.min.js"></script>
+    <!-- chart libraries start -->
+    <script src="/static/js/excanvas.js"></script>
+    <script src="/static/js/jquery.flot.min.js"></script>
+    <script src="/static/js/jquery.flot.pie.min.js"></script>
+    <script src="/static/js/jquery.flot.stack.js"></script>
+    <script src="/static/js/jquery.flot.resize.min.js"></script>
+    <!-- chart libraries end -->
+ 
+    <script src="/static/js/jquery.chosen.min.js"></script>
+    <script src="/static/js/jquery.colorbox.min.js"></script>
+    <script src="/static/js/jquery.cleditor.min.js"></script>
+    <script src="/static/js/jquery.noty.js"></script>
+    <script src="/static/js/jquery.elfinder.min.js"></script>
+    <script src="/static/js/jquery.raty.min.js"></script>
+    <script src="/static/js/jquery.iphone.toggle.js"></script>
+    <script src="/static/js/jquery.autogrow-textarea.js"></script>
+    <script src="/static/js/jquery.uploadify-3.1.min.js"></script>
+    <script src="/static/js/jquery.history.js"></script>
+    <script src="/static/js/charisma.js"></script>
+    <script src="/static/js/jquery.uniform.min.js"></script>
+
+
+</body> 
+</html>
+
+
+

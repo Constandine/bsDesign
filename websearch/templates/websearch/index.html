@@ -1,0 +1,112 @@
+{% extends "base.html" %}
+{% block title %}
+W_Search!
+{% endblock %}
+{% block extra_head %}
+    <style>
+        body {
+            padding-top: 60px; /* 60px to make the container go all the way to the bottom of the topbar */
+      }
+      .container-fluid{
+      	padding: 0;
+      	margin-left:7%;
+      margin-right: 5%;
+      	max-height:1000px;
+      	max-width: 1180px;
+      }
+      #search{
+      	position: absolute;
+      	left: 450px;
+      	top: 230px;
+      }
+    </style> 
+{% endblock %}
+
+{% block body %}
+<!-- topbar starts -->
+  <div class="navbar navbar-inverse navbar-fixed-top">
+        <div class="navbar-inner">
+            <div class="container">  
+                <a class="brand" href="{% url 'websearch:index'%}">W-Search!</a>
+                <ul class="nav">
+                    {% if u %}
+                    <li>
+                        <img width="40" height="40" src="/static/face/{{ u.userprofile.face }}" />
+                    </li>
+                    <li id="user">
+                        <a href="{% url 'websearch:edit'%}">{{ u }}</a>
+                    </li>
+                    <li id="mylike">
+                        <a href="{% url 'websearch:like'%}">Mylike</a>
+                    </li>
+                    <li id="message">
+                        <a href="{% url 'websearch:showmsg'%}">Message</a>
+                    </li>
+                    <li>
+                        <a href="{% url 'websearch:login'%}">Logout <i class="icon-eject"></i></a>
+                    </li>
+                    {% else %}
+                    <li id="log">
+                        <a href="{% url 'websearch:login'%}">Login<i class="icon-play"></i></a>
+                    </li>
+                    <li id="register">
+                        <a href="{% url 'websearch:register'%}">Register</a>
+                    </li>
+                    {% endif %}
+                </ul>                     
+            </div>                
+        </div>
+    </div> 
+
+<div class="container-fluid">
+<div id="myCarousel" class="carousel slide">
+  <div class="carousel-inner">
+    <div class="item">
+    	<img height = "20" src="/static/img/todo1.jpg">
+    	<div class="carousel-caption">
+    		<h4>Tagore</h4>
+    		<p>If you shed tears when you miss the sun, you also miss the stars.</p>
+    	</div>
+    </div>
+    <div class="active item">
+    	<img src="/static/img/todo2.jpg">
+    	<div class="carousel-caption">
+    		<h4>Stray Birds</h4>
+    		<p>I cannot choose the best. The Best chooses me.</p>
+    	</div>
+    </div>
+    <div class="item">
+        <div class="carousel-caption">
+        <h4>Leaves of Grass</h4>
+        <p>The sun goes to cross the Western sea, leaving its last salutation to the East.</p>
+      </div>
+      <img src="/static/img/todo3.jpg"></div>
+  </div>
+      <footer>
+      <p class="pull-right">Powered by: <a href="mailto:wu.zhendong0907@gmail.com" title="wu.zhendong0907@gmail.com">W!</a></p>
+      <span class="pull-right">|</span>
+      <p class="pull-right"><a href="{% url 'websearch:contact'%}" target="_blank" color:black>Contact_Us</a> </p>
+    </footer>
+  <!-- Carousel nav -->
+  <a class="carousel-control left" href="#myCarousel" data-slide="prev">&lsaquo;</a>
+
+  <a class="carousel-control right" href="#myCarousel" data-slide="next">&rsaquo;</a>
+      </div>
+      </div>
+	<form id="search" action="{% url 'websearch:search' %}" method=get>
+		<table class="form-table">
+		<td>
+			<tr><i class="icon-search"></i><input type="text" id="kw" name="kw"></tr>
+                    <tr>&nbsp;&nbsp;</tr>
+			<tr><input type="hidden" id="pg" name="pg" value="1"></tr>
+			<tr><input type="submit" id="submit" value=" Search" class="btn btn-info" ></tr>
+		</td>
+		</table>
+	</form> 
+
+<script type="text/javascript">
+$('.carousel').carousel({
+  interval: 5000
+})
+</script>
+{% endblock %}
